@@ -42,7 +42,7 @@ Scenario: Create a Product
 Scenario: Read a Product
     When I visit the "Home Page"
     And I set the "Name" to "Hat"
-    And I click the "Search" button
+    And I press the "Search" button
     Then I should see the message "Success"
     When I copy the "Id" field
     And I press the "Clear" button
@@ -53,15 +53,15 @@ Scenario: Read a Product
     And I should see "A red fedora" in the "Description" field
     And I should see "True" in the "Available" dropdown
     And I should see "Cloths" in the "Category" dropdown
-    And I should see "59.95" in the "Price" Field
+    And I should see "59.95" in the "Price" field
 
 Scenario: Update a Product
     When I visit the "Home Page"
-    And I set the "Name" to "Shoes"
+    And I set the "Name" to "Hat"
     And I press the "Search" button
     Then I should see the message "Success"
-    And I should see "Blue shoes" in the "Description" field
-    When I change the "Description" field to "Red shoes"
+    And I should see "A red fedora" in the "Description" field
+    When I change "Name" to "Fedora"
     And I press the "Update" button
     Then I should see the message "Success"
     When I copy the "Id" field
@@ -69,19 +69,19 @@ Scenario: Update a Product
     And I paste the "Id" field
     And I press the "Retrieve" button
     Then I should see the message "Success"
-    And the "Description" field should say "Red shoes"
-    Then when I press the "Clear" button
+    And I should see "Fedora" in the "Name" field
+    When I press the "Clear" button
     And I press the "Search" button
     Then I should see the message "Success"
-    And I should see "Red shoes" in the results
-    And I should not see "Blue shoes" in the results
+    And I should see "Fedora" in the results
+    And I should not see "Hat" in the results
 
 Scenario: Delete a Product
     When I visit the "Home Page"
     And I set the "Name" to "Hat"
     And I press the "Search" button
     Then I should see the message "Success"
-    And the "Price" field should be "59.95"
+    And I should see "A red fedora" in the "Description" field
     When I copy the "Id" field
     And I press the "Clear" button
     And I paste the "Id" field
@@ -90,9 +90,9 @@ Scenario: Delete a Product
     When I press the "Clear" button
     And I press the "Search" button
     Then I should see the message "Success"
-    Then I should not see "Hat" in the results
+    And I should not see "Hat" in the results
 
-Scenario: List all Products
+Scenario: List all products
     When I visit the "Home Page"
     And I press the "Clear" button
     And I press the "Search" button
@@ -102,10 +102,10 @@ Scenario: List all Products
     And I should see "Big Mac" in the results
     And I should see "Sheets" in the results
 
-Scenario: Search by Category
+Scenario: Search by category
     When I visit the "Home Page"
     And I press the "Clear" button
-    And I set "Category" to "Food"
+    And I select "Food" in the "Category" dropdown
     And I press the "Search" button
     Then I should see the message "Success"
     And I should see "Big Mac" in the results
@@ -113,10 +113,10 @@ Scenario: Search by Category
     And I should not see "Shoes" in the results
     And I should not see "Sheets" in the results
 
-Scenario: Search Products by Availability
+Scenario: Search by available
     When I visit the "Home Page"
     And I press the "Clear" button
-    And I set "Available" to "True"
+    And I select "True" in the "Available" dropdown
     And I press the "Search" button
     Then I should see the message "Success"
     And I should see "Hat" in the results
@@ -124,7 +124,7 @@ Scenario: Search Products by Availability
     And I should see "Sheets" in the results
     And I should not see "Shoes" in the results
 
-Scenario: Search Products by Name
+Scenario: Search by name
     When I visit the "Home Page"
     And I set the "Name" to "Hat"
     And I press the "Search" button
